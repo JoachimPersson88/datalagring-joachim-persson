@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="EducationForEvery1.Application/EducationForEvery1.Application.csproj" />
   <Project Path="EducationForEvery1.Domain/EducationForEvery1.Domain.csproj" />
+  <Project Path="EducationForEvery1.Infrastructure/EducationForEvery1.Infrastructure.csproj" />
   <Project Path="EducationForEvery1/EducationForEvery1.csproj" />
 </Solution>
