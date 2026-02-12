@@ -11,7 +11,7 @@ public class Teacher
     public string LastName { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
 
-    private Teacher() { } // EF Core
+    private Teacher() { }
 
     public Teacher(string firstName, string lastName, string email)
     {
