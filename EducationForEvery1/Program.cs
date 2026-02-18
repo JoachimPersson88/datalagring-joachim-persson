@@ -17,6 +17,7 @@ app.UseSwaggerUI();
 
 app.MapCourseEndpoints();
 app.MapStudentEndpoints();
+app.MapCourseInstanceEndpoints();
 
 app.Run();
 
