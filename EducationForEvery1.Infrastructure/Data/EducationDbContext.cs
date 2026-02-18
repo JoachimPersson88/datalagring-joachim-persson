@@ -1,10 +1,6 @@
-﻿// Importerar dina domän-entiteter (Course, Student osv) så att DbContext kan använda dem.
-using EducationForEvery1.Domain.Entities;
-
-// Importerar EF Core-API:t (DbContext, DbSet, ModelBuilder, DeleteBehavior osv).
+﻿using EducationForEvery1.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-// Namespace = “adress” för klassen. Matchar din mapp/struktur i Infrastructure.
 namespace EducationForEvery1.Infrastructure.Data;
 
 // DbContext är EF Cores “huvudklass” för att prata med databasen.
@@ -114,7 +110,7 @@ public class EducationDbContext : DbContext
             b.HasIndex(x => new { x.StudentId, x.CourseInstanceId }).IsUnique();
         });
 
-        // Konfiguration för join-tabellen CourseInstanceTeacher (många-till-många)
+        // Konfiguration för join-tabellen CourseInstanceTeacher (many-to-many)
         modelBuilder.Entity<CourseInstanceTeacher>(b =>
         {
             // Sätter en sammansatt primärnyckel av två kolumner.
