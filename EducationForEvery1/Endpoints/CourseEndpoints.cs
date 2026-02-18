@@ -8,6 +8,9 @@ public static class CourseEndpoints
 {
     public static void MapCourseEndpoints(this IEndpointRouteBuilder app)
     {
+        // ============================================
+        // POST - Skapa ny kurs
+        // ============================================
         app.MapPost("/courses", async (EducationDbContext db, CourseCreateDto dto) =>
         {
             var course = new Course(dto.Title, dto.Description);
@@ -21,7 +24,9 @@ public static class CourseEndpoints
                 course.Description
             });
         });
-
+        // ============================================
+        // GET - Hämta alla kurser
+        // ============================================
         app.MapGet("/courses", async (EducationDbContext db) =>
         {
             var courses = await db.Courses
@@ -30,7 +35,9 @@ public static class CourseEndpoints
 
             return Results.Ok(courses);
         });
-
+        // ============================================
+        // GET - Hämta specifikt kurs
+        // ============================================
         app.MapGet("/courses/{id:int}", async (EducationDbContext db, int id) =>
         {
             var course = await db.Courses
@@ -40,7 +47,9 @@ public static class CourseEndpoints
 
             return course is null ? Results.NotFound() : Results.Ok(course);
         });
-
+        // ============================================
+        // DELETE - Ta bort kurs
+        // ============================================
         app.MapDelete("/courses/{id:int}", async (EducationDbContext db, int id) =>
         {
             var course = await db.Courses.FindAsync(id);

@@ -8,6 +8,9 @@ public static class StudentEndpoints
 {
     public static void MapStudentEndpoints(this IEndpointRouteBuilder app)
     {
+        // ============================================
+        // POST - Skapa nytt studentID
+        // ============================================
         app.MapPost("/students", async (EducationDbContext db, StudentCreateDto dto) =>
         {
             var student = new Student(dto.FirstName, dto.LastName, dto.Email);
@@ -22,7 +25,9 @@ public static class StudentEndpoints
                 student.Email
             });
         });
-
+        // ============================================
+        // GET - Hämta alla studentID
+        // ============================================
         app.MapGet("/students", async (EducationDbContext db) =>
         {
             var students = await db.Students
@@ -31,7 +36,9 @@ public static class StudentEndpoints
 
             return Results.Ok(students);
         });
-
+        // ============================================
+        // GET - Hämta specifik studentID
+        // ============================================
         app.MapGet("/students/{id:int}", async (EducationDbContext db, int id) =>
         {
             var student = await db.Students
@@ -41,7 +48,9 @@ public static class StudentEndpoints
 
             return student is null ? Results.NotFound() : Results.Ok(student);
         });
-
+        // ============================================
+        // DELETE - Ta bort specifik studentID
+        // ============================================
         app.MapDelete("/students/{id:int}", async (EducationDbContext db, int id) =>
         {
             var student = await db.Students.FindAsync(id);
