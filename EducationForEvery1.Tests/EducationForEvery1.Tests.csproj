@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EducationForEvery1.Infrastructure\EducationForEvery1.Infrastructure.csproj" />
+    <ProjectReference Include="..\EducationForEvery1\EducationForEvery1.csproj" />
   </ItemGroup>
 
   <ItemGroup>

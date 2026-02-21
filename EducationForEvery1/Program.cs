@@ -4,8 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<EducationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EducationDb")));
+if (!builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddDbContext<EducationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("EducationDb")));
+}
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
