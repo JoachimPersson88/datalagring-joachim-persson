@@ -77,6 +77,26 @@ public static class EnrollmentEndpoints
         });
 
         // ============================================
+        // GET - Hämta en specifik enrollment
+        // ============================================
+        app.MapGet("/enrollments/{id:int}", async (EducationDbContext db, int id) =>
+        {
+            var item = await db.Enrollments
+                .Where(e => e.Id == id)
+                .Select(e => new
+                {
+                    e.Id,
+                    e.StudentId,
+                    e.CourseInstanceId,
+                    e.EnrolledAtUtc,
+                    e.Status
+                })
+                .FirstOrDefaultAsync();
+
+            return item is null ? Results.NotFound() : Results.Ok(item);
+        });
+
+        // ============================================
         // POST - Avregistrera (Cancel) en enrollment
         // ============================================
         app.MapPost("/enrollments/{id:int}/cancel", async (EducationDbContext db, int id) =>
