@@ -17,8 +17,13 @@ public class CourseApiTests : IClassFixture<TestApplication>
         // Vi skapar en HttpClient som kommer att användas för att göra anrop mot vår testserver.
         _client = factory.CreateClient();
     }
-    // Testmetod som testar att vi kan skapa en kurs och sedan hämta den via GET /courses.
+
+    // =========================
+    // ARRANGE
+    // =========================
+
     [Fact]
+    // Testmetod som testar att vi kan skapa en kurs och sedan hämta den via GET /courses.
     public async Task PostCourse_Then_GetCourses_ReturnsCreatedCourse()
     {
         // Vi skapar ett anonymt objekt som representerar den kurs vi vill skapa.
@@ -27,6 +32,11 @@ public class CourseApiTests : IClassFixture<TestApplication>
             title = "Testkurs",
             description = "Beskrivning"
         };
+
+        // =========================
+        // ACT
+        // =========================
+
         // Vi skickar en POST-förfrågan till /courses med det skapade objektet som JSON.
         var postResponse = await _client.PostAsJsonAsync("/courses", create);
         // Vi kollar om POST-förfrågan lyckades. Om inte, läser vi svaret som text och kastar ett undantag med statuskod och svarstext.
@@ -37,6 +47,11 @@ public class CourseApiTests : IClassFixture<TestApplication>
             // Vi kastar ett undantag som innehåller statuskoden och svaret från servern för att underlätta felsökning.
             throw new Exception($"POST /courses failed: {(int)postResponse.StatusCode}\n{body}");
         }
+
+        // =========================
+        // ASSERT
+        // =========================
+
         // Om POST-förfrågan lyckades, fortsätt som vanligt.
         postResponse.EnsureSuccessStatusCode();
         // Vi skickar en GET-förfrågan till /courses för att hämta alla kurser.

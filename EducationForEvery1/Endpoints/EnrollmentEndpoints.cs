@@ -53,7 +53,7 @@ public static class EnrollmentEndpoints
                 enrollment.StudentId,
                 enrollment.CourseInstanceId,
                 enrollment.EnrolledAtUtc,
-                enrollment.Status
+                Status = enrollment.Status.ToString()
             });
         });
 
@@ -69,7 +69,7 @@ public static class EnrollmentEndpoints
                     e.StudentId,
                     e.CourseInstanceId,
                     e.EnrolledAtUtc,
-                    e.Status
+                    Status = e.Status.ToString()
                 })
                 .ToListAsync();
 
@@ -89,7 +89,7 @@ public static class EnrollmentEndpoints
                     e.StudentId,
                     e.CourseInstanceId,
                     e.EnrolledAtUtc,
-                    e.Status
+                    Status = e.Status.ToString()
                 })
                 .FirstOrDefaultAsync();
 
